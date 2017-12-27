@@ -30,13 +30,13 @@ function addComment(commentText, postIndex) {
 
 // TODO write renderComments function
 function renderComments() {
-    $('.posts').find('p').remove();
-    for (var i=0; i < posts.length; i++) {
-        var currPost = posts[i];
-        $('.posts').append('<p class="post" data-index="' + i + '" data-id="' + currPost.id + 
-        '"> <button class="btn btn-danger remove" type="button">REMOVE</button> ' + currPost.text + 
-        ' <a class="comment" href="#">Comment</a> </p>');
-    }
+    $('.posts').find('.comment-form p').remove();
+//     for (var i=0; i < posts.length; i++) {
+//         var currPost = posts[i];
+//         $('.posts').append('<p class="post" data-index="' + i + '" data-id="' + currPost.id + 
+//         '"> <button class="btn btn-danger remove" type="button">REMOVE</button> ' + currPost.text + 
+//         ' <a class="comment" href="#">Comment</a> </p>');
+//     }
 }
 
 $('button.add-post').click(function() {
@@ -51,9 +51,9 @@ $('.posts').on('click', 'button.remove', (function() {
 }));
 
 $('.posts').on('click', 'a.comment', (function() {
-    $(this).closest('p').append('<div class="form-group">' + '<h4>Add a Comment</h4>' + 
+    $(this).closest('p').append('<div class="comment-form"> <div class="form-group">' + '<h4>Add a Comment</h4>' + 
     '<input type="text" id="comment-name" class="form-control" placeholder="Comment Text, User Name"> </div>' + 
-    '<button class="btn btn-primary add-comment" type="button">Post comment</button>');
+    '<button class="btn btn-primary add-comment" type="button">Post comment</button>' + '</div>');
 }));
 
 $('.posts').on('click', 'button.add-comment', function() {
