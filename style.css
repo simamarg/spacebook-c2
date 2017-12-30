@@ -1,0 +1,50 @@
+form .btn.add-post {
+    margin-bottom: 15px;
+}
+
+.posts .post {
+    border: 1px solid rgba(0,0,0,.125);
+    margin-bottom: 15px;
+}
+
+.posts .post .post-body {
+    padding: 1.25rem;
+}
+
+.posts .post .post-link {
+    padding-right: 1.1rem;
+    color: #337ab7;
+    display: inline;
+}
+
+.posts .post .post-link:hover {
+    color: #23527c;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.posts .post .write-comment {
+    padding: 10px;
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.posts .post .write-comment input {
+    margin-bottom: 5px;
+}
+
+.posts .post .comments {
+    margin: 15px 0 20px 0; 
+}
+
+.posts .post .comments .comment {
+    background-color: #eeeff4;
+    margin-bottom: 5px;
+}
+
+.posts .post .comments .comment span {
+    color: #337ab7;
+    padding-right: 0.7rem;
+    font-weight: bold;
+}
