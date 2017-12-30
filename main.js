@@ -74,11 +74,13 @@ $('.posts').on('click', 'div.remove-post', function() {
 });
 
 $('.posts').on('click', 'div.add-comment', (function() {
-    $(this).closest('div.post-body').append(`<div class="write-comment">
-                                                <input type="text" class="form-control comment-name" placeholder="What's your name?">
-                                                <input type="text" class="form-control comment-text" placeholder="Write a comment...">
-                                                <button class="btn btn-primary" type="button">Post</button>
-                                            </div>`);
+    if ($(this).closest('div.post-body').find('.write-comment').length === 0) {
+        $(this).closest('div.post-body').append(`<div class="write-comment">
+                                                    <input type="text" class="form-control comment-name" placeholder="What's your name?">
+                                                    <input type="text" class="form-control comment-text" placeholder="Write a comment...">
+                                                    <button class="btn btn-primary" type="button">Post</button>
+                                                </div>`);
+    }
 }));
 
 $('.posts').on('click', '.write-comment button', function() {
