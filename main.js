@@ -74,6 +74,7 @@ $('.posts').on('click', 'div.remove-post', function() {
 });
 
 $('.posts').on('click', 'div.add-comment', (function() {
+    // open a comment form only if it's not opened yet
     if ($(this).closest('div.post-body').find('.write-comment').length === 0) {
         $(this).closest('div.post-body').append(`<div class="write-comment">
                                                     <input type="text" class="form-control comment-name" placeholder="What's your name?">
