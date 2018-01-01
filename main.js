@@ -4,16 +4,6 @@ var SpacebookApp = function () {
     //   { text: "Man, this is a comment!"},
     //   { text: "Man, this is a comment!"},
     //   { text: "Man, this is a comment!"}
-    // ]},
-    // {text: "Hello world", id: 0, comments:[
-    //   { text: "Man, this is a comment!"},
-    //   { text: "Man, this is a comment!"},
-    //   { text: "Man, this is a comment!"}
-    // ]},
-    // {text: "Hello world", id: 0, comments:[
-    //   { text: "Man, this is a comment!"},
-    //   { text: "Man, this is a comment!"},
-    //   { text: "Man, this is a comment!"}
     // ]}
   ];
 
@@ -35,25 +25,21 @@ var SpacebookApp = function () {
       id: currentId,
       comments: []
     }
-
     currentId += 1;
-
     posts.push(post);
   }
 
   var renderPosts = function () {
     $posts.empty();
-
     for (var i = 0; i < posts.length; i += 1) {
       var post = posts[i];
 
-      var commentsContainer = '<div class="comments-container">' +
-      '<input type="text" class="comment-name">' +
-      '<button class="btn btn-primary add-comment">Post Comment</button> </div>';
-
-      $posts.append('<div class="post" data-id=' + post.id + '>'
-        + '<a href="#" class="remove">remove</a> ' + '<a href="#" class="show-comments">comments</a> ' + post.text +
-        commentsContainer + '</div>');
+      // adding posts to the screen by using Handlebars
+      var postItem = {id: post.id, postText: post.text};
+      var source = $('#post-template').html();
+      var template = Handlebars.compile(source);
+      var newHTML = template(postItem);
+      $posts.append(newHTML);
     }
   }
 
@@ -85,13 +71,17 @@ var SpacebookApp = function () {
     for (i = 0; i < posts.length; i += 1) {
       var commentList = '';
       var postComments = posts[i].comments;
+
+      // adding comments to the screen by using Handlebars
+      var commentsData = {comment: []};
       for (j = 0; j < postComments.length; j += 1) {
-        commentList += '<li data-id="' + j + '">' + postComments[j].text + 
-        '<a href="#" class="remove-comment">remove</a> </li>';
+        commentsData.comment.push({id: j, commentText: postComments[j].text});
       }
-      commentList = '<ul>' + commentList + '</ul>';
-      var currentPost = '.post[data-id=' + posts[i].id + ']'; 
-      $(currentPost).append(commentList);
+      var source = $('#comments-template').html();
+      var template = Handlebars.compile(source);
+      var newHTML = template(commentsData);
+      var currentPost = '.post[data-id=' + posts[i].id + ']';
+      $(currentPost).append(newHTML);
     }
   }
 
@@ -104,14 +94,11 @@ var SpacebookApp = function () {
   }
 
   return {
-    posts: posts,
     createPost: createPost,
     renderPosts: renderPosts,
     removePost: removePost,
     createComment: createComment,
     renderComments: renderComments,
-
-    // TODO: Implement
     removeComment: removeComment,
     toggleComments: toggleComments
   }
